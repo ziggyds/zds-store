@@ -1,0 +1,61 @@
+name: zds-qbittorrent
+services:
+  qbittorrent:
+    container_name: zds-qbittorrent
+    image: ghcr.io/hotio/qbittorrent
+    ports:
+      - target: 8080
+        published: 8080
+        protocol: tcp
+      - target: 6881
+        published: 6881
+        protocol: tcp
+      - target: 6881
+        published: 6881
+        protocol: udp
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Etc/UTC
+      - WEBUI_PORTS=8080/tcp,8080/udp
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: for UserID
+        - container: PGID
+          description:
+            en_us: for GroupID
+        - container: TZ
+          description:
+            en_us: specify a timezone to use, see this list.
+        - container: WEBUI_PORTS
+          description:
+            en_us: for changing the port of the web UI, see below for explanation
+
+    volumes:
+      - type: bind
+        source: /host/qbittorrent/config
+        target: /config
+      - type: bind
+        source: /host/qbittorrent/downloads
+        target: /data
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: zds-qbittorrent
+  description:
+    en_us: The Qbittorrent project aims to provide an open-source software alternative to µTorrent. QBittorrent is based on the Qt toolkit and libtorrent-rasterbar library.
+  tagline:
+    en_us: The Qbittorrent project aims to provide an open-source software alternative to µTorrent. QBittorrent is based on the Qt toolkit and libtorrent-rasterbar library.
+  developer: "The qBittorrent project"
+  author: ziggyds
+  icon: https://github.com/walkxcode/dashboard-icons/blob/main/png/qbittorrent.png?raw=true
+  tips: {}
+  title:
+    en_us: qBittorrent
+  category: zds
+  project_url: https://www.qbittorrent.org

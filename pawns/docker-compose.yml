@@ -1,0 +1,38 @@
+name: zds-pawns
+services:
+  zds-pawns:
+    command:
+      - -email=email@example.com
+      - -password=changeme
+      - -device-name=casaos
+      - -device-id=casaos1
+      - -accept-tos
+    container_name: zds-pawns
+    hostname: zds-pawns
+    image: iproyal/pawns-cli:latest
+    labels:
+      icon: https://github.com/ziggyds/casaos-appstore/blob/main/Apps/pawns/pawns_icon.png?raw=true
+    restart: on-failure
+    x-casaos:
+      envs:
+        - container: PATH
+          description:
+            en_us: ""
+      image: ""
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  author: ziggyds
+  description:
+    en_us: "Passive income app."
+  developer: iproyal
+  icon: https://github.com/ziggyds/casaos-appstore/blob/main/Apps/pawns/pawns_icon.png?raw=true
+  main: zds-pawns
+  tagline:
+    en_us: Passive income app.
+  title:
+    custom: ""
+    en_us: Pawns
+  category: zds
